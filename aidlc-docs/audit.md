@@ -382,3 +382,18 @@ Plan 체크박스 업데이트 완료.
 **Context**: CONSTRUCTION - Code Generation, Part 2 - Steps 1~5
 
 ---
+
+## Code Generation - Backend Unit Tests & Integration Tests
+**Timestamp**: 2026-03-05T11:00:00Z
+**User Input**: "백엔드 (Unit 1) — 미완료 항목 작업해줘"
+**AI Response**: 백엔드 미완료 항목 완료:
+- Step 2~5 단위 테스트 체크박스 완료 (테스트 파일 이미 존재 확인)
+- Step 9 통합 테스트 3개 파일 생성:
+  - auth.e2e-spec.ts: 인증 플로우 (관리자/테이블 로그인, 토큰 검증, validation)
+  - order-flow.e2e-spec.ts: 주문 생성→상태변경→이용완료 전체 플로우
+  - multi-tenant.e2e-spec.ts: 멀티테넌트 데이터 격리 (교차 매장 접근 차단)
+- supertest, @types/supertest devDependency 추가
+Plan 체크박스 업데이트 완료. Unit 1 백엔드 전체 완료.
+**Context**: CONSTRUCTION - Code Generation, Part 2 - Steps 2~5 단위테스트 + Step 9 통합테스트
+
+---
