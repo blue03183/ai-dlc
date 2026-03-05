@@ -1,4 +1,4 @@
-// 공통 타입 정의 — 후속 Step에서 확장
+// 공통 타입 정의
 
 export interface Store {
   id: number;
@@ -55,3 +55,46 @@ export interface Order {
   items: OrderItem[];
   createdAt: string;
 }
+
+// Auth
+export interface TableLoginRequest {
+  storeIdentifier: string;
+  tableNumber: number;
+  password: string;
+}
+
+export interface TableLoginResponse {
+  token: string;
+  table: TableInfo;
+  session?: { id: number; status: string };
+}
+
+export interface AuthInfo {
+  token: string;
+  storeId: number;
+  tableId: number;
+  tableNumber: number;
+  storeName: string;
+}
+
+// Order API
+export interface CreateOrderRequest {
+  tableId: number;
+  items: { menuId: number; quantity: number }[];
+}
+
+export interface CreateOrderResponse {
+  id: number;
+  orderNumber: string;
+  items: OrderItem[];
+  totalAmount: number;
+  status: OrderStatus;
+  createdAt: string;
+}
+
+// SSE
+export type SSEEventType =
+  | 'ORDER_CREATED'
+  | 'ORDER_STATUS_CHANGED'
+  | 'ORDER_DELETED'
+  | 'SESSION_COMPLETED';
