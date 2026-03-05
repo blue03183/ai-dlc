@@ -11,10 +11,11 @@ export interface AdminInfo {
 
 export interface Admin {
   id: number;
-  storeId: number;
+  storeId?: number;
   username: string;
   role: AdminRole;
   createdAt: string;
+  updatedAt?: string;
 }
 
 export interface LoginRequest {
@@ -40,6 +41,7 @@ export interface Table {
   tableNumber: number;
   storeId: number;
   createdAt: string;
+  updatedAt?: string;
 }
 
 export interface CreateTableRequest {
@@ -53,6 +55,8 @@ export interface Category {
   name: string;
   sortOrder: number;
   storeId?: number;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface CreateCategoryRequest {
@@ -71,6 +75,7 @@ export interface Menu {
   isAvailable: boolean;
   storeId?: number;
   createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface CreateMenuRequest {
@@ -99,7 +104,8 @@ export type OrderStatus = 'PENDING' | 'PREPARING' | 'COMPLETED';
 
 export interface OrderItem {
   id: number;
-  menuId?: number;
+  orderId?: number;
+  menuId: number;
   menuName: string;
   quantity: number;
   unitPrice: number;
@@ -112,10 +118,11 @@ export interface Order {
   status: OrderStatus;
   totalAmount: number;
   tableId: number;
-  sessionId?: number;
+  sessionId: number;
   storeId?: number;
   items: OrderItem[];
   createdAt: string;
+  updatedAt?: string;
 }
 
 export interface UpdateOrderStatusRequest {
@@ -132,7 +139,7 @@ export interface OrderHistory {
   completedAt: string;
   storeId?: number;
   tableId?: number;
-  sessionId?: number;
+  sessionId: number;
 }
 
 // ===== SSE Events =====

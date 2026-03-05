@@ -13,8 +13,14 @@ apiClient.interceptors.request.use((config) => {
   return config;
 });
 
+// 백엔드 ApiResponse 래퍼 { success, data, message } → data만 추출
 apiClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    if (response.data && typeof response.data === 'object' && 'success' in response.data) {
+      response.data = response.data.data;
+    }
+    return response;
+  },
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
