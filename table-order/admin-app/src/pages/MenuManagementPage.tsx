@@ -43,13 +43,10 @@ export function MenuManagementPage() {
       ]);
       setCategories(catRes.data);
       setMenus(menuRes.data);
-      if (catRes.data.length > 0 && !selectedCategoryId) {
-        setSelectedCategoryId(catRes.data[0].id);
-      }
     } catch { /* ignore */ } finally {
       setLoading(false);
     }
-  }, [storeId, selectedCategoryId]);
+  }, [storeId]);
 
   useEffect(() => { fetchData(); }, [fetchData]);
 
