@@ -365,3 +365,20 @@ Plan 체크박스 업데이트 완료.
 **Context**: CONSTRUCTION - Code Generation, Part 2 - Step 0 완료
 
 ---
+
+## Code Generation - BE-Dev1 Steps Complete
+**Timestamp**: 2026-03-05T10:40:00Z
+**User Input**: "BE-Dev1 역할을 기반으로 코드 생성해줘."
+**AI Response**: BE-Dev1 담당 Step 1~5 코드 생성 완료.
+- Step 1: 9개 엔티티 전체 생성 (Store, Admin, TableEntity, TableSession, Category, Menu, Order, OrderItem, OrderHistory)
+- Step 2: AuthModule (JWT 전략, Guard, 관리자/테이블 로그인 API, 로그인 시도 제한, OwnerGuard)
+- Step 3: StoreModule (매장 조회 API, 식별자 검증)
+- Step 4: AdminModule (목록 조회, OWNER 전용 계정 생성)
+- Step 5: TableModule (CRUD, 세션 관리, 이용 완료 트랜잭션)
+- app.module.ts에 4개 모듈 등록
+- main.ts에 GlobalExceptionFilter 등록
+- 단위 테스트는 미생성 (체크박스 미완료)
+Plan 체크박스 업데이트 완료.
+**Context**: CONSTRUCTION - Code Generation, Part 2 - Steps 1~5
+
+---

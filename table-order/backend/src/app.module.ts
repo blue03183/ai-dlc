@@ -3,6 +3,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServeStaticModule } from '@nestjs/platform-express';
 import { join } from 'path';
+import { AuthModule } from './modules/auth/auth.module';
+import { StoreModule } from './modules/store/store.module';
+import { AdminModule } from './modules/admin/admin.module';
+import { TableModule } from './modules/table/table.module';
 
 @Module({
   imports: [
@@ -25,15 +29,14 @@ import { join } from 'path';
       rootPath: join(__dirname, '..', 'uploads'),
       serveRoot: '/uploads',
     }),
-    // Feature modules will be added here in subsequent steps
-    // AuthModule,
-    // StoreModule,
-    // AdminModule,
-    // TableModule,
-    // MenuModule,
-    // OrderModule,
-    // EventModule,
-    // UploadModule,
+    AuthModule,
+    StoreModule,
+    AdminModule,
+    TableModule,
+    // MenuModule,    — BE-Dev2 Step 6
+    // OrderModule,   — BE-Dev2 Step 7
+    // EventModule,   — BE-Dev2 Step 8
+    // UploadModule,  — BE-Dev2 Step 6
   ],
 })
 export class AppModule {}
