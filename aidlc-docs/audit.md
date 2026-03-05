@@ -307,3 +307,61 @@ Story Plan 승인 요청 표시.
 **Context**: CONSTRUCTION - Code Generation, Part 1 - Step 6
 
 ---
+
+## Code Generation - Monorepo Structure Request
+**Timestamp**: 2026-03-05T10:10:00Z
+**User Input**: "각 유닛별 작업을 나눠서 해야 하는데.. 그러려면 모노레포 구조가 반영이 먼저 되어야 할것같아.이건 어떻게 처리하지?"
+**AI Response**: 방법 A(Step 0 추가)와 방법 B(각 유닛 Step에 포함) 2가지 방안 제시
+**Context**: CONSTRUCTION - Code Generation, Part 1 - Planning, 사용자 질문
+
+---
+
+## Code Generation - Method A Selected
+**Timestamp**: 2026-03-05T10:12:00Z
+**User Input**: "방법 A 로 하자"
+**AI Response**: Step 0 추가 및 Step 번호 재정렬 수행. Step 0(모노레포 뼈대) 추가, 백엔드 Step 1~9 유지, customer-app Step 11→10~14, admin-app Step 16→15~20, README Step 22→21로 변경. 스토리 커버리지 테이블 업데이트 완료.
+**Context**: CONSTRUCTION - Code Generation, Part 1 - Planning, Plan 수정
+
+---
+
+## Code Generation - Session Continuation (Step Renumbering)
+**Timestamp**: 2026-03-05T10:15:00Z
+**AI Response**: 세션 연속 작업. 이전 세션에서 미완료된 Step 번호 재정렬 완료:
+- customer-app: Step 11~15 → Step 10~14
+- admin-app: Step 16~21 → Step 15~20
+- README: Step 22 → Step 21
+- Step 10, 15: Step 0 뼈대 기반 상세 설정으로 내용 조정
+- 스토리 커버리지 테이블 번호 업데이트 완료
+총 22개 Step (Step 0~21)으로 최종 정리.
+**Context**: CONSTRUCTION - Code Generation, Part 1 - Planning, Plan 수정 완료
+
+---
+
+## Code Generation - Plan Approval
+**Timestamp**: 2026-03-05T10:20:00Z
+**User Input**: "A"
+**AI Response**: Code Generation Plan 승인 확인. Part 2 코드 생성 시작.
+**Context**: CONSTRUCTION - Code Generation, Part 1 → Part 2 전환
+
+---
+
+## Code Generation - Step 0 Scope Limit
+**Timestamp**: 2026-03-05T10:22:00Z
+**User Input**: "Step 0 까지만 작업 진행해줘"
+**AI Response**: Step 0만 진행. 나머지 Step은 대기.
+**Context**: CONSTRUCTION - Code Generation, Part 2 - Step 0
+
+---
+
+## Code Generation - Step 0 Complete
+**Timestamp**: 2026-03-05T10:25:00Z
+**AI Response**: Step 0 모노레포 뼈대 생성 완료.
+생성된 구조:
+- table-order/ (루트: package.json, .gitignore)
+- table-order/backend/ (NestJS: package.json, tsconfig, nest-cli, .env, main.ts, app.module.ts, common/, modules/8개, database/, uploads/, test/)
+- table-order/customer-app/ (React+Vite: package.json, tsconfig, vite.config, index.html, main.tsx, App.tsx, api/client.ts, types/, styles/, pages/, components/, contexts/, hooks/)
+- table-order/admin-app/ (React+Vite: package.json, tsconfig, vite.config, index.html, main.tsx, App.tsx, api/client.ts, types/, styles/, pages/, components/, contexts/, hooks/, layouts/)
+Plan 체크박스 업데이트 완료.
+**Context**: CONSTRUCTION - Code Generation, Part 2 - Step 0 완료
+
+---
