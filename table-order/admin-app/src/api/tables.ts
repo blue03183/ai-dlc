@@ -11,10 +11,10 @@ export const tablesApi = {
   complete: (storeId: number, tableId: number) =>
     apiClient.post(`/stores/${storeId}/tables/${tableId}/complete`),
 
-  getOrderHistory: (storeId: number, tableId: number, dateFrom?: string, dateTo?: string) => {
+  getOrderHistory: (storeId: number, tableId: number, startDate?: string, endDate?: string) => {
     const params: Record<string, string> = {};
-    if (dateFrom) params.dateFrom = dateFrom;
-    if (dateTo) params.dateTo = dateTo;
+    if (startDate) params.startDate = startDate;
+    if (endDate) params.endDate = endDate;
     return apiClient.get<OrderHistory[]>(
       `/stores/${storeId}/tables/${tableId}/orders/history`,
       { params },
