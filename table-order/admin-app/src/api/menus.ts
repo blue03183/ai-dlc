@@ -17,6 +17,6 @@ export const menusApi = {
   delete: (storeId: number, menuId: number) =>
     apiClient.delete(`/stores/${storeId}/menus/${menuId}`),
 
-  reorder: (storeId: number, data: ReorderMenuRequest[]) =>
+  reorder: (storeId: number, data: ReorderMenuRequest) =>
     apiClient.put(`/stores/${storeId}/menus/reorder`, data),
 };

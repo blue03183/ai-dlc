@@ -196,7 +196,7 @@ export function MenuManagementPage() {
 
     const reorderData = reordered.map((m, i) => ({ menuId: m.id, sortOrder: i }));
     try {
-      await menusApi.reorder(storeId, reorderData);
+      await menusApi.reorder(storeId, { items: reorderData });
       // 로컬 상태 업데이트
       const updatedMenus = menus.map((m) => {
         const found = reorderData.find((r) => r.menuId === m.id);

@@ -40,27 +40,27 @@ export function DashboardPage() {
   const handleSSEEvent = useCallback((event: SSEEvent) => {
     switch (event.type) {
       case 'ORDER_CREATED':
-        setOrders((prev) => [...prev, event.data]);
-        setHighlightedTables((prev) => new Set(prev).add(event.data.tableId));
+        setOrders((prev) => [...prev, event.order]);
+        setHighlightedTables((prev) => new Set(prev).add(event.order.tableId));
         setTimeout(() => {
           setHighlightedTables((prev) => {
             const next = new Set(prev);
-            next.delete(event.data.tableId);
+            next.delete(event.order.tableId);
             return next;
           });
         }, 3000);
         break;
       case 'ORDER_STATUS_CHANGED':
         setOrders((prev) =>
-          prev.map((o) => o.id === event.data.orderId ? { ...o, status: event.data.status } : o),
+          prev.map((o) => o.id === event.orderId ? { ...o, status: event.status } : o),
         );
         break;
       case 'ORDER_DELETED':
-        setOrders((prev) => prev.filter((o) => o.id !== event.data.orderId));
+        setOrders((prev) => prev.filter((o) => o.id !== event.orderId));
         break;
       case 'SESSION_COMPLETED':
-        setOrders((prev) => prev.filter((o) => o.tableId !== event.data.tableId));
-        if (selectedTableId === event.data.tableId) setSelectedTableId(null);
+        setOrders((prev) => prev.filter((o) => o.tableId !== event.tableId));
+        if (selectedTableId === event.tableId) setSelectedTableId(null);
         break;
     }
   }, [selectedTableId]);

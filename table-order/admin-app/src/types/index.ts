@@ -92,11 +92,11 @@ export interface UpdateMenuRequest {
   categoryId?: number;
   description?: string;
   imageUrl?: string;
+  isAvailable?: boolean;
 }
 
 export interface ReorderMenuRequest {
-  menuId: number;
-  sortOrder: number;
+  items: { menuId: number; sortOrder: number }[];
 }
 
 // ===== Order =====
@@ -143,6 +143,7 @@ export interface OrderHistory {
 }
 
 // ===== SSE Events =====
+// 백엔드 EventService는 { type, ...data } flat 구조로 전송
 export type SSEEventType =
   | 'ORDER_CREATED'
   | 'ORDER_STATUS_CHANGED'
@@ -151,22 +152,24 @@ export type SSEEventType =
 
 export interface SSEOrderCreatedEvent {
   type: 'ORDER_CREATED';
-  data: Order;
+  order: Order;
 }
 
 export interface SSEOrderStatusChangedEvent {
   type: 'ORDER_STATUS_CHANGED';
-  data: { orderId: number; status: OrderStatus };
+  orderId: number;
+  status: OrderStatus;
 }
 
 export interface SSEOrderDeletedEvent {
   type: 'ORDER_DELETED';
-  data: { orderId: number };
+  orderId: number;
 }
 
 export interface SSESessionCompletedEvent {
   type: 'SESSION_COMPLETED';
-  data: { tableId: number; sessionId: number };
+  tableId: number;
+  sessionId: number;
 }
 
 export type SSEEvent =
