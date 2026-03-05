@@ -11,25 +11,17 @@ import {
 import { Store } from '../store/store.entity';
 import { Category } from './category.entity';
 
-@Entity('menus')
+@Entity('menu')
 @Index('idx_menu_store_category_order', ['storeId', 'categoryId', 'sortOrder'])
 export class Menu {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ name: 'store_id' })
   storeId: number;
 
-  @ManyToOne(() => Store)
-  @JoinColumn({ name: 'storeId' })
-  store: Store;
-
-  @Column()
+  @Column({ name: 'category_id' })
   categoryId: number;
-
-  @ManyToOne(() => Category)
-  @JoinColumn({ name: 'categoryId' })
-  category: Category;
 
   @Column({ type: 'varchar', length: 100 })
   name: string;
@@ -40,18 +32,26 @@ export class Menu {
   @Column({ type: 'text', nullable: true })
   description: string | null;
 
-  @Column({ type: 'varchar', length: 500, nullable: true })
+  @Column({ name: 'image_url', type: 'varchar', length: 500, nullable: true })
   imageUrl: string | null;
 
-  @Column({ type: 'int', default: 0 })
+  @Column({ name: 'sort_order', type: 'int', default: 0 })
   sortOrder: number;
 
-  @Column({ type: 'boolean', default: true })
+  @Column({ name: 'is_available', type: 'boolean', default: true })
   isAvailable: boolean;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @ManyToOne(() => Store)
+  @JoinColumn({ name: 'store_id' })
+  store: Store;
+
+  @ManyToOne(() => Category)
+  @JoinColumn({ name: 'category_id' })
+  category: Category;
 }

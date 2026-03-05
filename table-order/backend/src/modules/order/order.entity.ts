@@ -10,58 +10,59 @@ import {
   Index,
 } from 'typeorm';
 import { Store } from '../store/store.entity';
-import { Table } from '../table/table.entity';
+import { TableEntity } from '../table/table.entity';
 import { TableSession } from '../table/table-session.entity';
 import { OrderItem } from './order-item.entity';
 
-@Entity('orders')
+export enum OrderStatus {
+  PENDING = 'PENDING',
+  PREPARING = 'PREPARING',
+  COMPLETED = 'COMPLETED',
+}
+
+@Entity('order')
 @Index('idx_order_store_table_session', ['storeId', 'tableId', 'sessionId'])
 @Index('idx_order_store_status', ['storeId', 'status'])
-@Index('idx_order_store_created', ['storeId', 'createdAt'])
 export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ name: 'store_id' })
   storeId: number;
 
-  @ManyToOne(() => Store)
-  @JoinColumn({ name: 'storeId' })
-  store: Store;
-
-  @Column()
+  @Column({ name: 'table_id' })
   tableId: number;
 
-  @ManyToOne(() => Table)
-  @JoinColumn({ name: 'tableId' })
-  table: Table;
-
-  @Column()
+  @Column({ name: 'session_id' })
   sessionId: number;
 
-  @ManyToOne(() => TableSession)
-  @JoinColumn({ name: 'sessionId' })
-  session: TableSession;
-
-  @Column({ type: 'varchar', length: 20 })
+  @Column({ name: 'order_number', type: 'varchar', length: 20 })
   orderNumber: string;
 
-  @Column({
-    type: 'enum',
-    enum: ['PENDING', 'PREPARING', 'COMPLETED'],
-    default: 'PENDING',
-  })
-  status: 'PENDING' | 'PREPARING' | 'COMPLETED';
+  @Column({ type: 'enum', enum: OrderStatus, default: OrderStatus.PENDING })
+  status: OrderStatus;
 
-  @Column({ type: 'int' })
+  @Column({ name: 'total_amount', type: 'int' })
   totalAmount: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
   @OneToMany(() => OrderItem, (item) => item.order, { cascade: true })
   items: OrderItem[];
+
+  @ManyToOne(() => Store)
+  @JoinColumn({ name: 'store_id' })
+  store: Store;
+
+  @ManyToOne(() => TableEntity)
+  @JoinColumn({ name: 'table_id' })
+  table: TableEntity;
+
+  @ManyToOne(() => TableSession)
+  @JoinColumn({ name: 'session_id' })
+  session: TableSession;
 }

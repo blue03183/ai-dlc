@@ -4,22 +4,23 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
 
-@Entity('stores')
+@Entity('store')
 export class Store {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', length: 50, unique: true })
+  @Column({ name: 'store_identifier', type: 'varchar', length: 50, unique: true })
   storeIdentifier: string;
 
   @Column({ type: 'varchar', length: 100 })
   name: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 }

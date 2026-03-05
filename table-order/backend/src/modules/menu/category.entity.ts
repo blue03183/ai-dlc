@@ -10,29 +10,29 @@ import {
 } from 'typeorm';
 import { Store } from '../store/store.entity';
 
-@Entity('categories')
-@Index('idx_category_store_order', ['storeId', 'sortOrder'])
+@Entity('category')
 @Index('idx_category_store_name', ['storeId', 'name'], { unique: true })
+@Index('idx_category_store_order', ['storeId', 'sortOrder'])
 export class Category {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ name: 'store_id' })
   storeId: number;
-
-  @ManyToOne(() => Store)
-  @JoinColumn({ name: 'storeId' })
-  store: Store;
 
   @Column({ type: 'varchar', length: 50 })
   name: string;
 
-  @Column({ type: 'int', default: 0 })
+  @Column({ name: 'sort_order', type: 'int', default: 0 })
   sortOrder: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @ManyToOne(() => Store)
+  @JoinColumn({ name: 'store_id' })
+  store: Store;
 }

@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { OrderService } from './order.service';
-import { Order } from './order.entity';
+import { Order, OrderStatus } from './order.entity';
 import { OrderItem } from './order-item.entity';
 import { OrderHistory } from './order-history.entity';
 import { Menu } from '../menu/menu.entity';
@@ -47,21 +47,21 @@ describe('OrderService', () => {
 
   describe('updateStatus', () => {
     it('PENDING → PREPARING 허용', async () => {
-      const order = { id: 1, storeId: 1, status: 'PENDING', items: [] };
+      const order = { id: 1, storeId: 1, status: OrderStatus.PENDING, items: [] };
       mockOrderRepo.findOne.mockResolvedValue(order);
-      mockOrderRepo.save.mockResolvedValue({ ...order, status: 'PREPARING' });
-      const result = await service.updateStatus(1, 1, 'PREPARING');
-      expect(result.status).toBe('PREPARING');
+      mockOrderRepo.save.mockResolvedValue({ ...order, status: OrderStatus.PREPARING });
+      const result = await service.updateStatus(1, 1, OrderStatus.PREPARING);
+      expect(result.status).toBe(OrderStatus.PREPARING);
     });
 
     it('역방향 전이 거부 (COMPLETED → PREPARING)', async () => {
-      mockOrderRepo.findOne.mockResolvedValue({ id: 1, storeId: 1, status: 'COMPLETED', items: [] });
-      await expect(service.updateStatus(1, 1, 'PREPARING')).rejects.toThrow(BadRequestException);
+      mockOrderRepo.findOne.mockResolvedValue({ id: 1, storeId: 1, status: OrderStatus.COMPLETED, items: [] });
+      await expect(service.updateStatus(1, 1, OrderStatus.PREPARING)).rejects.toThrow(BadRequestException);
     });
 
     it('존재하지 않는 주문이면 NotFoundException', async () => {
       mockOrderRepo.findOne.mockResolvedValue(null);
-      await expect(service.updateStatus(1, 999, 'PREPARING')).rejects.toThrow(NotFoundException);
+      await expect(service.updateStatus(1, 999, OrderStatus.PREPARING)).rejects.toThrow(NotFoundException);
     });
   });
 

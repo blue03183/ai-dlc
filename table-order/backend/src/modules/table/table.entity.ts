@@ -10,28 +10,28 @@ import {
 } from 'typeorm';
 import { Store } from '../store/store.entity';
 
-@Entity('tables')
+@Entity('table_info')
 @Index('idx_table_store_number', ['storeId', 'tableNumber'], { unique: true })
-export class Table {
+export class TableEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ name: 'store_id' })
   storeId: number;
 
-  @ManyToOne(() => Store)
-  @JoinColumn({ name: 'storeId' })
-  store: Store;
-
-  @Column({ type: 'int' })
+  @Column({ name: 'table_number', type: 'int' })
   tableNumber: number;
 
   @Column({ type: 'varchar', length: 255 })
   password: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @ManyToOne(() => Store)
+  @JoinColumn({ name: 'store_id' })
+  store: Store;
 }

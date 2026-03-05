@@ -3,11 +3,11 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
-import { Order } from './order.entity';
+import { Order, OrderStatus } from './order.entity';
 import { OrderItem } from './order-item.entity';
 import { OrderHistory } from './order-history.entity';
 import { Menu } from '../menu/menu.entity';
-import { TableSession } from '../table/table-session.entity';
+import { TableSession, SessionStatus } from '../table/table-session.entity';
 
 @Injectable()
 export class OrderService {
@@ -51,10 +51,10 @@ export class OrderService {
 
       // 세션 확인 또는 자동 생성 (BR-02-1)
       let session = await manager.findOne(TableSession, {
-        where: { tableId, storeId, status: 'ACTIVE' },
+        where: { tableId, storeId, status: SessionStatus.ACTIVE },
       });
       if (!session) {
-        session = manager.create(TableSession, { storeId, tableId, status: 'ACTIVE' });
+        session = manager.create(TableSession, { storeId, tableId, status: SessionStatus.ACTIVE });
         session = await manager.save(TableSession, session);
       }
 
@@ -62,7 +62,7 @@ export class OrderService {
 
       const order = manager.create(Order, {
         storeId, tableId, sessionId: session.id,
-        orderNumber, status: 'PENDING', totalAmount,
+        orderNumber, status: OrderStatus.PENDING, totalAmount,
       });
       const savedOrder = await manager.save(Order, order);
 
@@ -86,7 +86,7 @@ export class OrderService {
 
   async findByTableSession(storeId: number, tableId: number): Promise<Order[]> {
     const session = await this.sessionRepo.findOne({
-      where: { storeId, tableId, status: 'ACTIVE' },
+      where: { storeId, tableId, status: SessionStatus.ACTIVE },
     });
     if (!session) return [];
     return this.orderRepo.find({
@@ -109,16 +109,16 @@ export class OrderService {
 
   async updateStatus(
     storeId: number, orderId: number,
-    newStatus: 'PENDING' | 'PREPARING' | 'COMPLETED',
+    newStatus: OrderStatus,
   ): Promise<Order> {
     const order = await this.orderRepo.findOne({
       where: { id: orderId, storeId }, relations: ['items'],
     });
     if (!order) throw new NotFoundException('주문을 찾을 수 없습니다.');
 
-    const validTransitions: Record<string, string> = {
-      PENDING: 'PREPARING',
-      PREPARING: 'COMPLETED',
+    const validTransitions: Record<string, OrderStatus> = {
+      [OrderStatus.PENDING]: OrderStatus.PREPARING,
+      [OrderStatus.PREPARING]: OrderStatus.COMPLETED,
     };
     if (validTransitions[order.status] !== newStatus) {
       throw new BadRequestException(`${order.status}에서 ${newStatus}로 변경할 수 없습니다.`);
