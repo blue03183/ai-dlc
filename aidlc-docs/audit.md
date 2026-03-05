@@ -281,3 +281,29 @@ Story Plan 승인 요청 표시.
 **Context**: CONSTRUCTION - Functional Design, Step 7
 
 ---
+
+## Functional Design - Approval
+**Timestamp**: 2026-03-05T10:05:00Z
+**User Input**: "승인"
+**AI Response**: Functional Design 승인 확인. Code Generation 단계로 진행.
+**Context**: CONSTRUCTION - Functional Design → Code Generation 전환
+
+---
+
+## Code Generation - Plan Created
+**Timestamp**: 2026-03-05T10:08:00Z
+**AI Response**: Code Generation Plan 생성 완료. 22개 Step, 3개 유닛, 20개 스토리 전체 커버.
+- Unit 1 (백엔드): Step 1~10 (프로젝트 설정, 엔티티, 8개 모듈, 통합 테스트)
+- Unit 2 (고객 앱): Step 11~15 (프로젝트 설정, 인증, 메뉴, 장바구니, 주문)
+- Unit 3 (관리자 앱): Step 16~21 (프로젝트 설정, 로그인, 대시보드, 테이블/메뉴/관리자 관리)
+- 공통: Step 22 (README)
+**Context**: CONSTRUCTION - Code Generation, Part 1 - Planning
+
+---
+
+## Code Generation - Plan Approval Prompt
+**Timestamp**: 2026-03-05T10:08:01Z
+**AI Response**: Code Generation Plan 승인 요청 표시
+**Context**: CONSTRUCTION - Code Generation, Part 1 - Step 6
+
+---
