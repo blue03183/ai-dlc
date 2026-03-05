@@ -7,6 +7,10 @@ import { AuthModule } from './modules/auth/auth.module';
 import { StoreModule } from './modules/store/store.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { TableModule } from './modules/table/table.module';
+import { MenuModule } from './modules/menu/menu.module';
+import { OrderModule } from './modules/order/order.module';
+import { EventModule } from './modules/event/event.module';
+import { UploadModule } from './modules/upload/upload.module';
 
 @Module({
   imports: [
@@ -33,10 +37,10 @@ import { TableModule } from './modules/table/table.module';
     StoreModule,
     AdminModule,
     TableModule,
-    // MenuModule,    — BE-Dev2 Step 6
-    // OrderModule,   — BE-Dev2 Step 7
-    // EventModule,   — BE-Dev2 Step 8
-    // UploadModule,  — BE-Dev2 Step 6
+    MenuModule,
+    OrderModule,
+    EventModule,
+    UploadModule,
   ],
 })
 export class AppModule {}
