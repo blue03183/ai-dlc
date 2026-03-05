@@ -34,7 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       authApi.tableLogin(data).then((res) => {
         const info: AuthInfo = {
           token: res.token,
-          storeId: 1, // TODO: 실제 API에서는 JWT/응답에서 추출
+          storeId: res.table.storeId,
           tableId: res.table.id,
           tableNumber: res.table.tableNumber,
           storeName: res.table.storeName,
@@ -54,7 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const res = await authApi.tableLogin(data);
     const info: AuthInfo = {
       token: res.token,
-      storeId: 1,
+      storeId: res.table.storeId,
       tableId: res.table.id,
       tableNumber: res.table.tableNumber,
       storeName: res.table.storeName,

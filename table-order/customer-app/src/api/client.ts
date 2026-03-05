@@ -14,14 +14,22 @@ apiClient.interceptors.request.use((config) => {
 });
 
 apiClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // 백엔드 ApiResponse 래핑 해제: { success, data } → data
+    if (response.data && typeof response.data === 'object' && 'success' in response.data) {
+      response.data = response.data.data;
+    }
+    return response;
+  },
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('tableInfo');
       window.location.href = '/setup';
     }
-    return Promise.reject(error);
+    // 백엔드 에러 메시지 추출
+    const message = error.response?.data?.message || error.message;
+    return Promise.reject(new Error(message));
   },
 );
 

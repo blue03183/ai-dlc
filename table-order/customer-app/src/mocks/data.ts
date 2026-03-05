@@ -23,7 +23,12 @@ export const mockMenus: Menu[] = [
 ];
 
 let orderCounter = 0;
-const mockOrders: Order[] = [];
+let mockOrders: Order[] = [];
+
+export function resetMockOrders(): void {
+  orderCounter = 0;
+  mockOrders = [];
+}
 
 export function getMockOrders(): Order[] {
   return [...mockOrders].sort(

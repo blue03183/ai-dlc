@@ -18,11 +18,18 @@ export default function OrdersPage() {
 
   useEffect(() => {
     if (!auth) return;
-    orderApi.getByTable(auth.storeId, auth.tableId).then(setOrders).catch(() => {}).finally(() => setLoading(false));
+    orderApi.getByTable(auth.storeId, auth.tableId)
+      .then((data) => setOrders([...data].reverse()))
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, [auth]);
 
   // SSE 구독
   useEffect(() => {
+    const u0 = subscribe('ORDER_CREATED', (d: unknown) => {
+      const { order } = d as { order: Order };
+      setOrders((prev) => [order, ...prev]);
+    });
     const u1 = subscribe('ORDER_STATUS_CHANGED', (d: unknown) => {
       const { orderId, status } = d as { orderId: number; status: OrderStatus };
       setOrders((prev) => prev.map((o) => o.id === orderId ? { ...o, status } : o));
@@ -32,12 +39,14 @@ export default function OrdersPage() {
       setOrders((prev) => prev.filter((o) => o.id !== orderId));
     });
     const u3 = subscribe('SESSION_COMPLETED', () => setOrders([]));
-    return () => { u1(); u2(); u3(); };
+    return () => { u0(); u1(); u2(); u3(); };
   }, [subscribe]);
 
   const refresh = useCallback(() => {
     if (!auth) return;
-    orderApi.getByTable(auth.storeId, auth.tableId).then(setOrders).catch(() => {});
+    orderApi.getByTable(auth.storeId, auth.tableId)
+      .then((data) => setOrders([...data].reverse()))
+      .catch(() => {});
   }, [auth]);
 
   if (loading) return <div className="loading">주문 내역을 불러오는 중...</div>;

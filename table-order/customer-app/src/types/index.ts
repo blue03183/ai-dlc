@@ -10,6 +10,7 @@ export interface TableInfo {
   id: number;
   tableNumber: number;
   storeName: string;
+  storeId: number;
 }
 
 export interface Category {
