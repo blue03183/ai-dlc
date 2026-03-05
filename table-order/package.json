@@ -4,6 +4,10 @@
   "private": true,
   "description": "테이블오더 서비스 모노레포",
   "scripts": {
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:reset": "docker compose down -v && docker compose up -d",
+    "db:seed": "docker exec -i table-order-mysql mysql --default-character-set=utf8mb4 -u root -ppassword table_order < docker/seed.sql",
     "backend:dev": "npm --prefix backend run start:dev",
     "customer:dev": "npm --prefix customer-app run dev",
     "admin:dev": "npm --prefix admin-app run dev"
