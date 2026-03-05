@@ -3,6 +3,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServeStaticModule } from '@nestjs/platform-express';
 import { join } from 'path';
+import { MenuModule } from './modules/menu/menu.module';
+import { OrderModule } from './modules/order/order.module';
+import { EventModule } from './modules/event/event.module';
+import { UploadModule } from './modules/upload/upload.module';
 
 @Module({
   imports: [
@@ -14,9 +18,9 @@ import { join } from 'path';
         type: 'mysql',
         host: config.get('DB_HOST', 'localhost'),
         port: config.get<number>('DB_PORT', 3306),
-        username: config.get('DB_USERNAME', 'root'),
-        password: config.get('DB_PASSWORD', 'password'),
-        database: config.get('DB_DATABASE', 'table_order'),
+        username: config.get('DB_USERNAME', 'tableorder'),
+        password: config.get('DB_PASSWORD', 'tableorder'),
+        database: config.get('DB_DATABASE', 'tableorder'),
         entities: [join(__dirname, '**', '*.entity.{ts,js}')],
         synchronize: true, // 개발 환경 전용
       }),
@@ -25,15 +29,16 @@ import { join } from 'path';
       rootPath: join(__dirname, '..', 'uploads'),
       serveRoot: '/uploads',
     }),
-    // Feature modules will be added here in subsequent steps
+    // BE-Dev1 modules (to be added)
     // AuthModule,
     // StoreModule,
     // AdminModule,
     // TableModule,
-    // MenuModule,
-    // OrderModule,
-    // EventModule,
-    // UploadModule,
+    // BE-Dev2 modules
+    MenuModule,
+    OrderModule,
+    EventModule,
+    UploadModule,
   ],
 })
 export class AppModule {}
