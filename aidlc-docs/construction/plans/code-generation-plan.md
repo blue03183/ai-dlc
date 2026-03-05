@@ -29,46 +29,46 @@ table-order/          (워크스페이스 루트)
 # Unit 1: 백엔드 API (backend/)
 
 ## Step 1: 데이터베이스 엔티티 및 마이그레이션
-- [ ] Store 엔티티
-- [ ] Admin 엔티티
-- [ ] Table 엔티티
-- [ ] TableSession 엔티티
-- [ ] Category 엔티티
-- [ ] Menu 엔티티
-- [ ] Order 엔티티
-- [ ] OrderItem 엔티티
-- [ ] OrderHistory 엔티티
-- [ ] 초기 시드 데이터 (Store, Admin OWNER 계정)
+- [x] Store 엔티티
+- [x] Admin 엔티티
+- [x] Table 엔티티
+- [x] TableSession 엔티티
+- [x] Category 엔티티
+- [x] Menu 엔티티
+- [x] Order 엔티티
+- [x] OrderItem 엔티티
+- [x] OrderHistory 엔티티
+- [x] 초기 시드 데이터 (Store, Admin OWNER 계정)
 - **스토리**: 전체 스토리의 데이터 기반
 - **담당**: BE-Dev1 (Auth/Store/Admin/Table), BE-Dev2 (Menu/Order)
 
 ## Step 2: AuthModule 구현
-- [ ] JWT 전략 및 Guard 구현
-- [ ] 관리자 로그인 API (POST /api/auth/admin/login)
-- [ ] 테이블 태블릿 로그인 API (POST /api/auth/table/login)
-- [ ] 로그인 시도 제한 로직
-- [ ] 역할 기반 Guard (OwnerGuard)
+- [x] JWT 전략 및 Guard 구현
+- [x] 관리자 로그인 API (POST /api/auth/admin/login)
+- [x] 테이블 태블릿 로그인 API (POST /api/auth/table/login)
+- [x] 로그인 시도 제한 로직
+- [x] 역할 기반 Guard (OwnerGuard)
 - [ ] 단위 테스트
 - **스토리**: US-101, US-102
 - **담당**: BE-Dev1
 
 ## Step 3: StoreModule 구현
-- [ ] 매장 정보 조회 API
-- [ ] 매장 식별자 검증 서비스
+- [x] 매장 정보 조회 API
+- [x] 매장 식별자 검증 서비스
 - [ ] 단위 테스트
 - **담당**: BE-Dev1
 
 ## Step 4: AdminModule 구현
-- [ ] 관리자 목록 조회 API
-- [ ] 관리자 계정 생성 API (OWNER 전용)
+- [x] 관리자 목록 조회 API
+- [x] 관리자 계정 생성 API (OWNER 전용)
 - [ ] 단위 테스트
 - **스토리**: US-103
 - **담당**: BE-Dev1
 
 ## Step 5: TableModule 구현
-- [ ] 테이블 CRUD API
-- [ ] 테이블 세션 관리 서비스
-- [ ] 이용 완료 API (세션 종료 + 주문 이력 이동)
+- [x] 테이블 CRUD API
+- [x] 테이블 세션 관리 서비스
+- [x] 이용 완료 API (세션 종료 + 주문 이력 이동)
 - [ ] 단위 테스트
 - **스토리**: US-601, US-603
 - **담당**: BE-Dev1
