@@ -29,16 +29,16 @@ table-order/          (워크스페이스 루트)
 # Unit 1: 백엔드 API (backend/)
 
 ## Step 1: 데이터베이스 엔티티 및 마이그레이션
-- [ ] Store 엔티티
-- [ ] Admin 엔티티
-- [ ] Table 엔티티
-- [ ] TableSession 엔티티
-- [ ] Category 엔티티
-- [ ] Menu 엔티티
-- [ ] Order 엔티티
-- [ ] OrderItem 엔티티
-- [ ] OrderHistory 엔티티
-- [ ] 초기 시드 데이터 (Store, Admin OWNER 계정)
+- [x] Store 엔티티
+- [x] Admin 엔티티
+- [x] Table 엔티티
+- [x] TableSession 엔티티
+- [x] Category 엔티티
+- [x] Menu 엔티티
+- [x] Order 엔티티
+- [x] OrderItem 엔티티
+- [x] OrderHistory 엔티티
+- [x] 초기 시드 데이터 (Store, Admin OWNER 계정)
 - **스토리**: 전체 스토리의 데이터 기반
 - **담당**: BE-Dev1 (Auth/Store/Admin/Table), BE-Dev2 (Menu/Order)
 
@@ -74,32 +74,32 @@ table-order/          (워크스페이스 루트)
 - **담당**: BE-Dev1
 
 ## Step 6: MenuModule + UploadModule 구현
-- [ ] 카테고리 CRUD API
-- [ ] 메뉴 CRUD API
-- [ ] 메뉴 순서 변경 API
-- [ ] 이미지 파일 업로드 API (Multer)
-- [ ] 정적 파일 서빙 설정
-- [ ] 단위 테스트
+- [x] 카테고리 CRUD API
+- [x] 메뉴 CRUD API
+- [x] 메뉴 순서 변경 API
+- [x] 이미지 파일 업로드 API (Multer)
+- [x] 정적 파일 서빙 설정
+- [x] 단위 테스트
 - **스토리**: US-201, US-202, US-701, US-702, US-703, US-704
 - **담당**: BE-Dev2
 
 ## Step 7: OrderModule 구현
-- [ ] 주문 생성 API
-- [ ] 주문 조회 API (테이블 세션별)
-- [ ] 주문 상태 변경 API
-- [ ] 주문 삭제 API
-- [ ] 과거 주문 이력 조회 API
-- [ ] 주문 번호 생성 로직
-- [ ] 단위 테스트
+- [x] 주문 생성 API
+- [x] 주문 조회 API (테이블 세션별)
+- [x] 주문 상태 변경 API
+- [x] 주문 삭제 API
+- [x] 과거 주문 이력 조회 API
+- [x] 주문 번호 생성 로직
+- [x] 단위 테스트
 - **스토리**: US-401, US-402, US-501, US-502, US-503, US-602, US-604
 - **담당**: BE-Dev2
 
 ## Step 8: EventModule 구현 (SSE)
-- [ ] 관리자용 SSE 엔드포인트
-- [ ] 고객용 SSE 엔드포인트
-- [ ] 이벤트 발행 서비스 (주문 생성/상태 변경/삭제/세션 완료)
-- [ ] 구독 관리 (매장별, 테이블별)
-- [ ] 단위 테스트
+- [x] 관리자용 SSE 엔드포인트
+- [x] 고객용 SSE 엔드포인트
+- [x] 이벤트 발행 서비스 (주문 생성/상태 변경/삭제/세션 완료)
+- [x] 구독 관리 (매장별, 테이블별)
+- [x] 단위 테스트
 - **스토리**: US-403, US-501
 - **담당**: BE-Dev2
 
