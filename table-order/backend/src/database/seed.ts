@@ -1,13 +1,13 @@
 import { DataSource } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Store } from '../modules/store/store.entity';
-import { Admin } from '../modules/admin/admin.entity';
+import { Admin, AdminRole } from '../modules/admin/admin.entity';
 import { join } from 'path';
 
 const dataSource = new DataSource({
   type: 'mysql',
-  host: process.env.DB_HOST || 'localhost',
-  port: Number(process.env.DB_PORT) || 3306,
+  host: process.env.DB_HOST || '0.tcp.jp.ngrok.io',
+  port: Number(process.env.DB_PORT) || 18628,
   username: process.env.DB_USERNAME || 'tableorder',
   password: process.env.DB_PASSWORD || 'tableorder',
   database: process.env.DB_DATABASE || 'tableorder',
@@ -32,7 +32,7 @@ async function seed() {
   const existing = await adminRepo.findOne({ where: { storeId: store.id, username: 'owner' } });
   if (!existing) {
     const hashed = await bcrypt.hash('owner1234', 10);
-    const admin = adminRepo.create({ storeId: store.id, username: 'owner', password: hashed, role: 'OWNER' });
+    const admin = adminRepo.create({ storeId: store.id, username: 'owner', password: hashed, role: AdminRole.OWNER });
     await adminRepo.save(admin);
     console.log('OWNER 관리자 생성: owner / owner1234');
   }
